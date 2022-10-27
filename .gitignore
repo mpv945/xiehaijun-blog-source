@@ -1,3 +1,12 @@
+#忽略 public/ 目录下的所有文件
+public/
+resources/_gen
+.idea
+
+
+# 仅仅忽略项目根目录下的 xiehaijun-blog 文件，不包括 subdir/xiehaijun-blog
+/xiehaijun-blog
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
