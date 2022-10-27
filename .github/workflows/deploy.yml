@@ -31,7 +31,7 @@ jobs:
               with:
                   PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
                   EXTERNAL_REPOSITORY: mpv945/xiehaijun-blog
-                  PUBLISH_BRANCH: master
+                  PUBLISH_BRANCH: main
                   PUBLISH_DIR: ./public
                   commit_message: ${{ github.event.head_commit.message }}
 
