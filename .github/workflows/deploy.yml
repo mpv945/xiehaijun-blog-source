@@ -46,8 +46,8 @@ jobs:
             - name: Build Gitee Pages
               uses: yanglbme/gitee-pages-action@main
               with:
-		  gitee-username: mpv945
-		  gitee-password: ${{ secrets.GITEE_PASSWORD }}
-		  gitee-repo: mpv945/xiehaijun-blog
-		  branch: master
-		  https: true
+                  gitee-username: mpv945
+                  gitee-password: ${{ secrets.GITEE_PASSWORD }}
+                  gitee-repo: mpv945/xiehaijun-blog
+                  branch: master
+                  https: true
