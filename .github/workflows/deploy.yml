@@ -1,3 +1,5 @@
+# 插件的市场地址：https://github.com/marketplace?type=actions 
+# 教程地址：https://www.imooc.com/article/322530
 name: deploy
 on:
     push:
