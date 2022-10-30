@@ -14,8 +14,8 @@ languages:
         weight: 1
     zh-cn:
         languageName: 中文
-        title: 演示站点
-        description: 演示说明
+        title: 孤帆远影
+        description: 孤帆远影
         weight: 2
     ar:
         languageName: عربي
@@ -48,14 +48,19 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:  # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    favicon: static/favicon.ico # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
         since: 2020
-        customText:
+        customText: <a href="https://beian.miit.gov.cn/" target="_blank">备案号</a>
+                    <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022030313号-1</a>
+                    
+
+    timezone: "Asia/Shanghai"
 
     dateFormat:
-        published: Jan 02, 2006
+        #published: Jan 02, 2006
+        #published: 2006-01-02 15:04
         lastUpdated: Jan 02, 2006 15:04 MST
 
     sidebar:
@@ -76,7 +81,8 @@ params:
 
     comments:
         enabled: true
-        provider: disqus
+        #provider: disqus
+        provider: waline
 
         disqusjs:
             shortname:
@@ -105,8 +111,8 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/component.html
         waline:
-            serverURL:
-            lang:
+            serverURL: https://blog-waline-psi-opal.vercel.app/
+            lang: zh-CN
             pageview:
             emoji:
                 - https://unpkg.com/@waline/emojis@1.0.1/weibo
