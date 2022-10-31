@@ -1,5 +1,36 @@
+# 使用教程 ：https://docs.github.com/cn/actions
 # 插件的市场地址：https://github.com/marketplace?type=actions 
 # 教程地址：https://www.imooc.com/article/322530
+# 同步到腾讯oss ： https://github.com/marketplace/actions/tencent-cos-action 和 https://github.com/marketplace/actions/tencent-cloudbase-github-action 
+# 同步到阿里云oss ： https://henryme.com/2022/06/hexo-cd-with-github-action-efea902f4b8a.html#%E5%AE%9E%E7%8E%B0-push-%E6%97%B6%E5%8F%91%E9%80%81%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91
+# 发布到maven仓库：https://blog.csdn.net/isea533/article/details/123962397 和 https://young-flash.github.io/2022/03/11/%E9%80%9A%E8%BF%87%20GitHub%20Action%20%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%20Maven%20%E5%8C%85%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/
+# 发布npm包 ： https://zhuanlan.zhihu.com/p/494193833 和 https://www.cnblogs.com/wangyang0210/p/16645158.html
+# rust包 : https://learnku.com/rust/t/68512
+
+# 多平台构建 ： https://lisz.me/tech/docker/github-action.html
+# 同步到腾讯coding ： https://cloud.tencent.com/developer/article/1798369 和 https://zhuanlan.zhihu.com/p/504859297
+# 推送镜像 : https://frederick-s.github.io/2021/12/26/build-and-push-docker-image-to-docker-hub-with-github-actions/ 和 https://devpress.csdn.net/cloudnative/62f521857e6682346618a17f.html
+#           https://twbhub.com/post/github-actions_publish_images/  和 https://juejin.cn/post/7052889711618031624
+# 部署spring cloud项目 : https://segmentfault.com/a/1190000041682730 和 https://github.com/sudojia/actions-deploy-springboot/blob/master/.github/workflows/main.yml
+#                       https://www.springcloud.io/post/2022-08/springcloud-github-actions/#gsc.tab=0
+# 亚马逊云 ： https://learn.microsoft.com/en-us/azure/spring-apps/how-to-github-actions?pivots=programming-language-java
+# 谷歌 ： https://lazyinwork.com/2022/07/23/push-image-to-gcr-using-github-action/
+
+# 同步到vps ： https://newzone.top/deploy/Static.html#%E5%90%8C%E6%AD%A5%E5%88%B0-ftp 和 https://www.jianshu.com/p/c26524472998 以及 https://dev.to/lencx/05-tauri-ru-men-pian-kua-ping-tai-bian-yi-1h4d
+
+
+# 生成Release ： https://blog.csdn.net/pfourfire/article/details/125002425 和 https://cloud.tencent.com/developer/article/1970730 以及 https://zhuanlan.zhihu.com/p/470866199
+# flutter ： https://coldstone.fun/post/2020/02/26/flutter-github-actions/
+# ios : https://www.jianshu.com/p/6973839bcab0 和 https://docs.taro.zone/blog
+# pyqt：windows: https://blog.996workers.icu/archives/shi-yong-githubaction-jie-he-pyinstaller-ba-python-zi-dong-da-bao-cheng-exe-ying-yong
+# go 多平台打包 ： https://ameow.xyz/archives/go-multiplatform-docker
+# 前端 nodejs:https://juejin.cn/post/7055567512292818951
+#     reactjs : https://zhuanlan.zhihu.com/p/542170190 和 https://segmentfault.com/a/1190000041449997
+#     vuejs : https://juejin.cn/post/7075734060428951559
+
+# k8s : https://llli.icu/blogs/%E5%85%B6%E4%BB%96/2022/0319.html#%E7%BC%96%E5%86%99action%E6%96%87%E4%BB%B6
+# 证书申请 ： https://blog.men.ci/ssl-with-github-actions/
+# 自签名证书：https://soulteary.com/2022/10/22/make-docker-tools-image-with-only-3md-self-signed-certificate-certs-maker.html
 name: deploy
 on:
     push:
