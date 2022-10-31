@@ -33,11 +33,11 @@
 # 自签名证书：https://soulteary.com/2022/10/22/make-docker-tools-image-with-only-3md-self-signed-certificate-certs-maker.html
 name: deploy
 on:
-    push:
-    workflow_dispatch:
-    schedule:
-        # Runs everyday at 8:00 AM [ 0 8 * * *]
-        - cron: "0 0 * * *"
+  push:
+  workflow_dispatch:
+  schedule:
+    # Runs everyday at 8:00 AM [ 0 8 * * *] # 参考 https://blog.csdn.net/Ximerr/article/details/123501772
+    - cron: '0 0 * * *'
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
