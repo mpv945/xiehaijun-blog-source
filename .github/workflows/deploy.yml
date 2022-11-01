@@ -37,6 +37,7 @@ on:
   workflow_dispatch:
   schedule:
     # Runs everyday at 8:00 AM [ 0 8 * * *] # 参考 https://blog.csdn.net/Ximerr/article/details/123501772
+    # Settings --> Branches 【生效必须把默认分支设置成工作流所在的分支，时间是UTC时间，中国时间加8】
     - cron: '0 0 * * *'
 jobs:
     build-and-deploy:
