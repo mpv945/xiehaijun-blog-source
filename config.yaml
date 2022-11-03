@@ -111,11 +111,16 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/component.html
         waline:
-            serverURL: https://waline.ewancle.com
+            serverURL: https://waline.ewancle.com/
             lang: zh-CN
             pageview:
+            visitor: false
             emoji:
                 - https://unpkg.com/@waline/emojis@1.0.1/weibo
+                - https://cdn.jsdelivr.net/gh/walinejs/emojis/qq
+                - https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba
+                - https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus
+                - https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili
             requiredMeta:
                 - name
                 - email
