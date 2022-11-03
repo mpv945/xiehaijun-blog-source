@@ -75,6 +75,7 @@ jobs:
               env:
                   SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
               with:
+                  # 默认推送在 main分支，不知是不是和上面配置有关海斯和source-repo的默认分支匹配。待确认
                   source-repo: git@github.com:mpv945/xiehaijun-blog.git
                   #destination-repo: git@gitee.com:mpv945/xiehaijun-blog.git
                   destination-repo: git@gitee.com:mpv945/mpv945.git
@@ -84,5 +85,6 @@ jobs:
                   gitee-username: mpv945
                   gitee-password: ${{ secrets.GITEE_PASSWORD }}
                   gitee-repo: mpv945/mpv945
-                  branch: master
+                  # 指定page页使用哪个分支
+                  branch: main
                   https: true
