@@ -111,7 +111,7 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/component.html
         waline:
-            serverURL: https://blog-waline-psi-opal.vercel.app/
+            serverURL: https://waline.ewancle.com/
             lang: zh-CN
             pageview:
             emoji:
