@@ -14,8 +14,8 @@ languages:
         weight: 1
     zh-cn:
         languageName: 中文
-        title: 孤帆远影
-        description: 孤帆远影
+        title: 高山流水
+        description: 高山流水
         weight: 2
     ar:
         languageName: عربي
@@ -48,7 +48,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: static/favicon.ico # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    favicon: /favicon.ico # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
         since: 2020
