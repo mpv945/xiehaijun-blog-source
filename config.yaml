@@ -4,7 +4,7 @@ languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 5
 #title: Example Site
-title: 孤帆远影
+title: 高山流水
 
 languages:
     en:
@@ -51,7 +51,7 @@ params:
     favicon: /favicon.ico # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
-        since: 2020
+        since: 2022
         customText: <a href="https://beian.miit.gov.cn/" target="_blank">备案号</a>
                     <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备19013893号-1</a>
                     
@@ -65,11 +65,12 @@ params:
 
     sidebar:
         emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        subtitle: 少年投身IT行，老来无伴又何妨。擦肩美女不屑看，三千码友在身旁。高山流水觅知音，千里之外寻友心。
         avatar:
             enabled: true
+            # local 如果true，头像图像应该放在assets/${avatar.src}，这允许主题自动调整图像大小。
             local: true
-            src: img/avatar.png
+            #src: img/avatar.png
 
     article:
         math: false
