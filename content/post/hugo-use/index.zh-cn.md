@@ -1,12 +1,19 @@
 ---
-title: Chinese Test
-description: 这是一个副标题
-date: 2022-04-19T00:56:00+08:00
-slug: test-chinese
-image: helena-hertz-wWZzXlDpMog-unsplash.jpg
+author: Xie Haijun
+title: 自建博客 - 初识HUGO
+description: Hugo 是 Go 编写的静态网站生成器，速度快，易用，可配置。依赖于 Markdown 文件，Hugo 只需要几分之一秒就可以渲染一个经典的中型网站，最好网站的每个部分渲染只需 1 毫秒。Hugo 非常适合博客，文档等等网站的生成。
+date: 2022-11-07T00:56:00+08:00
+slug: blog-1-chinese
+image: https://images.ewancle.com/blog/imghugo-what.png
+# 如果要在该帖子/页面中使用库，请使用前面的参数 math。
+# math: true
 categories:
-    - Test
-    - 测试
+    - DevOps # 和 content/categories下的分类目录同名
+#    - 测试
+categoryes_weight: 1
+tags: 
+    - Blog
+tags_weight: 1
 ---
 
 ## 正文测试
