@@ -129,9 +129,10 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           pip install -r python/requirements.txt
           pip install requests
       - name: 运行py程序
-        shell: bash
+        #shell: bash
         run: |
           export TZ='Asia/Shanghai'
+          ls -all /home/runner/.cache/pip/
           if [ -f /home/runner/.cache/pip/su-python-sdk.tar.gz ]
           then 
             echo "The file exist"

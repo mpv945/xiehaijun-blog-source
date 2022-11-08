@@ -8,3 +8,6 @@ Example site modified from https://github.com/gohugoio/hugoBasicExample
 
 # 获取actions徽章：https://blog.mafeifan.com/DevOps/GithubActions/GitHub-Actions%E7%9A%84%E5%BE%BD%E7%AB%A0%E5%9B%BE%E6%A0%87.html
 # https://github.com/mpv945/xiehaijun-blog-source/workflows/deploy-auto-xie/badge.svg?branch=master
+
+
+# git判读某个目录，两次提交是否有差异：git diff HEAD^ HEAD ./content/
