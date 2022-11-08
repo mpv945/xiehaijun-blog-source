@@ -1,7 +1,7 @@
 # 使用教程 ：https://docs.github.com/cn/actions
-# 插件的市场地址：https://github.com/marketplace?type=actions 
+# 插件的市场地址：https://github.com/marketplace?type=actions
 # 教程地址：https://www.imooc.com/article/322530
-# 同步到腾讯oss ： https://github.com/marketplace/actions/tencent-cos-action 和 https://github.com/marketplace/actions/tencent-cloudbase-github-action 
+# 同步到腾讯oss ： https://github.com/marketplace/actions/tencent-cos-action 和 https://github.com/marketplace/actions/tencent-cloudbase-github-action
 # 同步到阿里云oss ： https://henryme.com/2022/06/hexo-cd-with-github-action-efea902f4b8a.html#%E5%AE%9E%E7%8E%B0-push-%E6%97%B6%E5%8F%91%E9%80%81%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91
 # 发布到maven仓库：https://blog.csdn.net/isea533/article/details/123962397 和 https://young-flash.github.io/2022/03/11/%E9%80%9A%E8%BF%87%20GitHub%20Action%20%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%20Maven%20%E5%8C%85%E5%88%B0%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/
 # 发布npm包 ： https://zhuanlan.zhihu.com/p/494193833 和 https://www.cnblogs.com/wangyang0210/p/16645158.html
@@ -18,7 +18,6 @@
 
 # 同步到vps ： https://newzone.top/deploy/Static.html#%E5%90%8C%E6%AD%A5%E5%88%B0-ftp 和 https://www.jianshu.com/p/c26524472998 以及 https://dev.to/lencx/05-tauri-ru-men-pian-kua-ping-tai-bian-yi-1h4d
 
-
 # 生成Release ： https://blog.csdn.net/pfourfire/article/details/125002425 和 https://cloud.tencent.com/developer/article/1970730 以及 https://zhuanlan.zhihu.com/p/470866199
 # flutter ： https://coldstone.fun/post/2020/02/26/flutter-github-actions/
 # ios : https://www.jianshu.com/p/6973839bcab0 和 https://docs.taro.zone/blog
@@ -31,153 +30,167 @@
 # k8s : https://llli.icu/blogs/%E5%85%B6%E4%BB%96/2022/0319.html#%E7%BC%96%E5%86%99action%E6%96%87%E4%BB%B6
 # 证书申请 ： https://blog.men.ci/ssl-with-github-actions/
 # 自签名证书：https://soulteary.com/2022/10/22/make-docker-tools-image-with-only-3md-self-signed-certificate-certs-maker.html
-name: deploy-auto-xie
+name: blog-ci # 使用规则：https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet\
 on:
+  label:
+    types: [created, edited]
   push:
-  workflow_dispatch:
+    branches:
+      #  - main
+      - master
+    paths:
+      - "sub-project/**"
+      - "!sub-project/docs/**" # ! 字符来指示应排除哪些路径。
+    paths-ignore:
+      - "docs/**"
+  workflow_dispatch: # 配置参数手动触发：https://blog.hszofficial.site/introduce/2020/11/30/%E4%BD%BF%E7%94%A8GithubActions%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/
   schedule:
     # Runs everyday at 8:00 AM [ 0 8 * * *] # 参考 https://blog.csdn.net/Ximerr/article/details/123501772
     # Settings --> Branches 【生效必须把默认分支设置成工作流所在的分支，时间是UTC时间，中国时间加8】
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 env:
-  GITHUB_USER_NAME: your_github_id # your github id
-  GITHUB_USER_EMAIL: your_email_addr # your email address
+  TEST_ENV: sdfdsfd
+  # GITHUB_USER_NAME: your_github_id # your github id
+  # GITHUB_USER_EMAIL: your_email_addr # your email address
 # CI官网教程 https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ 前端 https://bbs.huaweicloud.com/blogs/337454
-    build-and-deploy:
-        runs-on: ubuntu-latest
-        # if: github.event.repository.owner.id == github.event.sender.id # 自己star启动
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-              with:
-                  submodules: true
-                  fetch-depth: 0
-            - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
-              with:
-                  hugo-version: "latest"
-                  extended: true
-            - name: Build Web
-              # run: hugo
-              run: hugo --minify
-            - name: Deploy Web
-              uses: peaceiris/actions-gh-pages@v3
-              with:
-                  PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-                  EXTERNAL_REPOSITORY: mpv945/xiehaijun-blog
-                  PUBLISH_BRANCH: main
-                  PUBLISH_DIR: ./public
-                  force_orphan: true
-                  CNAME: www.ewancle.com
-                  commit_message: ${{ github.event.head_commit.message }}
-    async-gitee:
-        runs-on: ubuntu-latest
-        needs: build-and-deploy
-        steps:
-            - name: Sync to Gitee
-              uses: wearerequired/git-mirror-action@master
-              env:
-                  SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
-              with:
-                  # 默认推送在 main分支，不知是不是和上面配置有关海斯和source-repo的默认分支匹配。待确认
-                  source-repo: git@github.com:mpv945/xiehaijun-blog.git
-                  #destination-repo: git@gitee.com:mpv945/xiehaijun-blog.git
-                  destination-repo: git@gitee.com:mpv945/mpv945.git
-            - name: Build Gitee Pages
-              uses: yanglbme/gitee-pages-action@main
-              with:
-                  gitee-username: mpv945
-                  gitee-password: ${{ secrets.GITEE_PASSWORD }}
-                  gitee-repo: mpv945/mpv945
-                  # 指定page页使用哪个分支
-                  branch: main
-                  https: true
-    run-python: # https://www.csdn.net/tags/MtTaMg0sMTk3MTcwLWJsb2cO0O0O.html
-      runs-on: ubuntu-latest
-      needs: async-gitee
-      steps:
-        - uses: actions/checkout@v3
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, '[build]')" # 只有git message中包含[build]才触发构建，否则跳过
+    #if: "! contains(github.event.head_commit.message, 'wip')"
+    # if: github.event.repository.owner.id == github.event.sender.id # 自己star启动
+    # if: github.event.schedule != '30 5 * * 1,3'
+    steps:
+      - name: 克隆代码
+        uses: actions/checkout@v3 # 官网 https://github.com/actions/checkout
+        with:
+          submodules: true # 下载出子项目
+          fetch-depth: 0 # 目录层级
+      - name: 安装Hugo环境
+        uses: peaceiris/actions-hugo@v2 # https://github.com/peaceiris/actions-hugo
+        with:
+          hugo-version: "latest"
+          extended: true # 支持扩展包
+      - name: 构建Hugo网站
+        # run: hugo
+        run: hugo --minify
+      - name: 部署静态-GitHub
+        uses: peaceiris/actions-gh-pages@v3 # https://github.com/peaceiris/actions-gh-pages
+        with:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          EXTERNAL_REPOSITORY: mpv945/xiehaijun-blog
+          PUBLISH_BRANCH: main
+          PUBLISH_DIR: ./public
+          force_orphan: true
+          CNAME: www.ewancle.com
+          commit_message: ${{ github.event.head_commit.message }}
+  async-gitee:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    steps:
+      - name: 同步GitHub资源到Gitee
+        uses: wearerequired/git-mirror-action@master # https://github.com/wearerequired/git-mirror-action
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          # 默认推送在 main分支，不知是不是和上面配置有关海斯和source-repo的默认分支匹配。待确认
+          source-repo: git@github.com:mpv945/xiehaijun-blog.git
+          #destination-repo: git@gitee.com:mpv945/xiehaijun-blog.git
+          destination-repo: git@gitee.com:mpv945/mpv945.git
+      - name: Gitee部署Pages
+        uses: yanglbme/gitee-pages-action@main # https://gitee.com/yanglbme/gitee-pages-action
+        with:
+          gitee-username: mpv945
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          gitee-repo: mpv945/mpv945
+          # 指定page页使用哪个分支
+          branch: main
+          https: true
+  run-python: # https://www.csdn.net/tags/MtTaMg0sMTk3MTcwLWJsb2cO0O0O.html
+    runs-on: ubuntu-latest
+    needs: async-gitee
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Set up Python Env
-          uses: actions/setup-python@v4 # https://github.com/actions/setup-python
-          with:
-            python-version: '3.10'
-            check-latest: true
-            cache: 'pip'
-            #cache-dependency-path: '**/requirements-dev.txt'
-        - run: python --version
-        # - name: 安装模块
-        #   run: |
-        #     python -m pip install --upgrade pip
-        #     pip install arxiv
-        #     pip install requests
-        #     pip install -r requirements.txt
-        # - name: 生成json文件
-        #   run: |
-        #     export TZ='Asia/Shanghai'
-        #     python build_linux.py
-        # - name: 暂存提交
-        #   env:
-        #     NAME: merrycodes
-        #     EMAIL: merrycodes@163.com
-        #   run: |
-        #     git config --global user.name "$NAME"
-        #     git config --global user.email "$EMAIL"
-        #     export TZ='Asia/Shanghai'
-        #     git add .
-        #     git commit -m "update" -a
-        # - name: 推送
-        #   uses: ad-m/github-push-action@master
-        #   with:
-        #     github_token: ${{ secrets.TOKEN }}
-        #     branch: main
-    # 忽略和多版本：https://github.com/actions/setup-java/blob/main/.github/workflows/build.yml
-    run-java: # https://github.com/merrycodes/Office-E5/blob/main/.github/workflows/main.yml
-      runs-on: ubuntu-latest # runs-on: windows-latest 或者 runs-on: macos-latest
-      needs: async-gitee
-      steps:
-        - uses: actions/checkout@v3
+      - name: 安装Python
+        uses: actions/setup-python@v4 # https://github.com/actions/setup-python
+        with:
+          python-version: "3.10"
+          check-latest: true
+          cache: "pip"
+          #cache-dependency-path: '**/requirements-dev.txt'
+      - run: python --version
+      # - name: 安装模块
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install arxiv
+      #     pip install requests
+      #     pip install -r requirements.txt
+      # - name: 生成json文件
+      #   run: |
+      #     export TZ='Asia/Shanghai'
+      #     python build_linux.py
+      # - name: 暂存提交
+      #   env:
+      #     NAME: merrycodes
+      #     EMAIL: merrycodes@163.com
+      #   run: |
+      #     git config --global user.name "$NAME"
+      #     git config --global user.email "$EMAIL"
+      #     export TZ='Asia/Shanghai'
+      #     git add .
+      #     git commit -m "update" -a
+      # - name: 推送
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.TOKEN }}
+      #     branch: main
+  # 忽略和多版本：https://github.com/actions/setup-java/blob/main/.github/workflows/build.yml
+  run-java: # https://github.com/merrycodes/Office-E5/blob/main/.github/workflows/main.yml
+    runs-on: ubuntu-latest # runs-on: windows-latest 或者 runs-on: macos-latest
+    needs: async-gitee
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Set up JDK
-          uses: actions/setup-java@v3 # https://github.com/actions/setup-java
-          with:
-            java-version: '17' # versions: 8, 11, 16, 17
-            check-latest: true
-            distribution: 'temurin' # 发行版：temurin zulu adopt  adopt-openj9  liberica  microsoft  corretto
-            architecture: x64 # x86 # optional - defaults to x64
-            java-package: jdk # optional (jdk or jre) - defaults to jdk
-            cache: maven
-        - run: java -version
-        - run: mvn -v
-        #- run: java -cp java HelloWorldApp
-        # - name: Set up Scala 2.13.2
-        #   run: |
-        #     wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.deb
-        #     sudo dpkg -i scala-2.13.2.deb && sudo apt install -f
-        #     scala --version
-        # - name: mvn package
-        #   run: |
-        #     mvn --batch-mode --update-snapshots verify
-        #     mvn --batch-mode --update-snapshots package
-        #     mkdir staging && cp target/*.jar staging
-        # - name: 上传制品
-        #   uses: actions/upload-artifact@v3
-        #   with:
-        #     name: Package
-        #     path: staging
-        # - name: Run jar
-        #   env:
-        #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        #     CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        #   run: |
-        #     java -jar ./officeE5-1.0-SNAPSHOT-jar-with-dependencies.jar "$CLIENT_ID" "$USERNAME" "$PASSWORD" "$TENANT_GUID" "$CLIENT_SECRET"  >> ./run.log
-        #     tail run.log
-    # https://www.geeksforgeeks.org/automated-release-for-android-using-github-actions/
-    # https://juejin.cn/post/7055958932933574669
-    # https://www.sipios.com/blog-tech/tips-for-creating-stunning-software-releases-automatically
-    # release: # https://cloud.tencent.com/developer/article/1970730 https://blog.csdn.net/pfourfire/article/details/125002425
-    #   name: Release GitHub Actions
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - uses: technote-space/release-github-actions@v6
+      - name: 安装Java环境
+        uses: actions/setup-java@v3 # https://github.com/actions/setup-java
+        with:
+          java-version: "17" # versions: 8, 11, 16, 17
+          check-latest: true
+          distribution: "temurin" # 发行版：temurin zulu adopt  adopt-openj9  liberica  microsoft  corretto
+          architecture: x64 # x86 # optional - defaults to x64
+          java-package: jdk # optional (jdk or jre) - defaults to jdk
+          cache: maven
+      - run: java -version
+      - run: mvn -v
+      #- run: java -cp java HelloWorldApp
+      # - name: Set up Scala 2.13.2
+      #   run: |
+      #     wget https://downloads.lightbend.com/scala/2.13.2/scala-2.13.2.deb
+      #     sudo dpkg -i scala-2.13.2.deb && sudo apt install -f
+      #     scala --version
+      # - name: mvn package
+      #   run: |
+      #     mvn --batch-mode --update-snapshots verify
+      #     mvn --batch-mode --update-snapshots package
+      #     mkdir staging && cp target/*.jar staging
+      # - name: 上传制品
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: Package
+      #     path: staging
+      # - name: Run jar
+      #   env:
+      #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      #     CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      #   run: |
+      #     java -jar ./officeE5-1.0-SNAPSHOT-jar-with-dependencies.jar "$CLIENT_ID" "$USERNAME" "$PASSWORD" "$TENANT_GUID" "$CLIENT_SECRET"  >> ./run.log
+      #     tail run.log
+  # https://www.geeksforgeeks.org/automated-release-for-android-using-github-actions/
+  # https://juejin.cn/post/7055958932933574669
+  # https://www.sipios.com/blog-tech/tips-for-creating-stunning-software-releases-automatically
+  # release: # https://cloud.tencent.com/developer/article/1970730 https://blog.csdn.net/pfourfire/article/details/125002425
+  #   name: Release GitHub Actions
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: technote-space/release-github-actions@v6
