@@ -20,6 +20,9 @@ config = SuClientConfig('api.su.baidu.com',
                         timeout=120)
 def purge_cache():
     
+    print("BAIDU_SU_ACCESS_KEY :", env_dist.get('BAIDU_SU_ACCESS_KEY')) 
+    print("BAIDU_SU_SECRET_KEY :", os.getenv('BAIDU_SU_SECRET_KEY'))
+    print("BLOG_DOMAIN :", os.environ.get('BLOG_DOMAIN')) 
     params = {}
     params["domain"] = os.environ.get('BLOG_DOMAIN')
     params["purge_everything"] = True

@@ -137,7 +137,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           files: "/home/runner/.cache/pip/su-python-sdk.tar.gz"
       - name: 不存在下载sdk
         if: steps.check_files.outputs.files_exists != 'true'
-        run: |
+        run: | # 或者使用step下载文件：suisei-cn/actions-download-file@v1
           wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
       - name: 运行py程序
         #shell: bash
