@@ -117,28 +117,28 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       - name: 安装Python
         uses: actions/setup-python@v4 # https://github.com/actions/setup-python
         with:
-          python-version: "2.7"
+          python-version: "3.9"
           check-latest: true
           cache: "pip" # 需要在根目录存在：**/requirements.txt，或者下面配置手动指定
           #cache-dependency-path: '**/requirements-dev.txt'
           update-environment: true
       - run: python --version
       - name: 安装模块
-        run: |
+        run: | # apt install wget -y
           python -m pip install --upgrade pip
           pip install -r python/requirements.txt
           pip install requests
           ls -all
-          apt install wget -y
-      - name: 安装sdk
+      - name: 判断文件是否存在
+        id: check_files
+        uses: andstor/file-existence-action@v2 # https://github.com/marketplace/actions/file-existence
+        with:
+          # files: "package.json, LICENSE, README.md"
+          files: "/home/runner/.cache/pip/su-python-sdk.tar.gz"
+      - name: 不存在安装sdk
+        if: steps.check_files.outputs.files_exists != 'true'
         run: |
-          if [ -f /home/runner/.cache/pip/su-python-sdk.tar.gz ]
-          then 
-            echo "The file exist"
-          else
-            echo "The file doesn't exist"
-            wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
-          if
+          wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
       - name: 运行py程序
         #shell: bash
         run: |
