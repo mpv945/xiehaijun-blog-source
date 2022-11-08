@@ -41,8 +41,8 @@ on:
     paths:
       - "sub-project/**"
       - "!sub-project/docs/**" # ! 字符来指示应排除哪些路径。
-    paths-ignore:
-      - "docs/**"
+    #paths-ignore: # 包含和忽略只能二选一
+    #  - "docs/**"
   workflow_dispatch: # 配置参数手动触发：https://blog.hszofficial.site/introduce/2020/11/30/%E4%BD%BF%E7%94%A8GithubActions%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/
   schedule:
     # Runs everyday at 8:00 AM [ 0 8 * * *] # 参考 https://blog.csdn.net/Ximerr/article/details/123501772
