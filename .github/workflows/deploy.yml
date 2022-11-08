@@ -129,6 +129,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           pip install -r python/requirements.txt
           pip install requests
           ls -all
+          apt install wget -y
       - name: 安装sdk
         run: |
           if [ -f /home/runner/.cache/pip/su-python-sdk.tar.gz ]
