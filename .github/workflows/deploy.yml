@@ -128,11 +128,9 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           python -m pip install --upgrade pip
           pip install -r python/requirements.txt
           pip install requests
-      - name: 运行py程序
-        #shell: bash
+          ls -all
+      - name: 安装sdk
         run: |
-          export TZ='Asia/Shanghai'
-          ls -all /home/runner/.cache/pip/
           if [ -f /home/runner/.cache/pip/su-python-sdk.tar.gz ]
           then 
             echo "The file exist"
@@ -140,8 +138,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
             echo "The file doesn't exist"
             wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
           if
-          pip install /home/runner/.cache/pip/su-python-sdk.tar.gz
-          python python/purge_cdn_cache.py
+      - name: 运行py程序
+        #shell: bash
+        run: |
+          export TZ='Asia/Shanghai'
+          ls -all /home/runner/.cache/pip/
       # - name: 暂存提交
       #   env:
       #     NAME: merrycodes
