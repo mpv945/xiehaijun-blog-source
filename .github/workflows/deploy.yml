@@ -117,7 +117,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       - name: 安装Python
         uses: actions/setup-python@v4 # https://github.com/actions/setup-python
         with:
-          python-version: "3.10"
+          python-version: "2.7"
           check-latest: true
           cache: "pip" # 需要在根目录存在：**/requirements.txt，或者下面配置手动指定
           #cache-dependency-path: '**/requirements-dev.txt'
