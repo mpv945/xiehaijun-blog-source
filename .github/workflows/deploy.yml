@@ -142,8 +142,15 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       - name: 运行py程序
         #shell: bash
         run: |
+          if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
+            echo '文件存在'
+          else
+            echo '文件不存在'
+          fi
           export TZ='Asia/Shanghai'
           ls -all /home/runner/.cache/pip/
+          pip install /home/runner/.cache/pip/su-python-sdk.tar.gz
+          python python/purge_cdn_cache.py
       # - name: 暂存提交
       #   env:
       #     NAME: merrycodes
