@@ -141,6 +141,10 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
       - name: 运行py程序
         #shell: bash
+        env:
+          BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
+          BAIDU_SU_SECRET_KEY: ${{ secrets.BAIDU_SU_SECRET_KEY }}
+          BLOG_DOMAIN: ${{ secrets.BLOG_DOMAIN }}
         run: |
           if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
             echo '文件存在'
