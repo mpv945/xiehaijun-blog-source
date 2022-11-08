@@ -128,10 +128,19 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           python -m pip install --upgrade pip
           pip install -r python/requirements.txt
           pip install requests
-      # - name: 生成json文件
-      #   run: |
-      #     export TZ='Asia/Shanghai'
-      #     python build_linux.py
+      - name: 运行py程序
+        shell: bash
+        run: |
+          export TZ='Asia/Shanghai'
+          if [ -f /home/runner/.cache/pip/su-python-sdk.tar.gz ]
+          then 
+            echo "The file exist"
+            wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
+          else
+            echo "The file doesn't exist"
+          if
+          pip install /home/runner/.cache/pip/su-python-sdk.tar.gz
+          python python/purge_cdn_cache.py
       # - name: 暂存提交
       #   env:
       #     NAME: merrycodes
@@ -203,3 +212,4 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
   #   runs-on: ubuntu-latest
   #   steps:
   #     - uses: technote-space/release-github-actions@v6
+  # 微信通知 https://github.com/marketplace/actions/github-action-for-wechat-work
