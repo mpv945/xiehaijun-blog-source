@@ -59,6 +59,9 @@ params:
         customText:
             <a href="https://beian.miit.gov.cn/" target="_blank">备案号</a>
             <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备19013893号-1</a>
+            <a href="https://github.com/mpv945/xiehaijun-blog-source/actions" target="_blank">
+               <img src="https://github.com/mpv945/xiehaijun-blog-source/workflows/deploy-auto-xie/badge.svg?branch=master">
+            </a>
 
     dateFormat:
         #published: Jan 02, 2006
@@ -68,9 +71,7 @@ params:
         #lastUpdated: Monday, Jan 02, 2006 15:04 MST
 
     sidebar:
-        # emoji: 🍥
-        # 获取actions徽章：https://blog.mafeifan.com/DevOps/GithubActions/GitHub-Actions%E7%9A%84%E5%BE%BD%E7%AB%A0%E5%9B%BE%E6%A0%87.html
-        emoji: https://github.com/mpv945/xiehaijun-blog-source/workflows/deploy-auto-xie/badge.svg?branch=master
+        emoji: 🍥
         subtitle: 少年投身IT行，老来无伴又何妨。擦肩美女不屑看，三千码友在身旁。高山流水觅知音，千里之外寻友心。
         avatar:
             enabled: true
