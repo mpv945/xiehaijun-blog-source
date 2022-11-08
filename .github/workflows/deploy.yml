@@ -137,6 +137,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           files: "/home/runner/.cache/pip/su-python-sdk.tar.gz"
       - name: 不存在下载sdk
         if: steps.check_files.outputs.files_exists != 'true'
+        # if: ${{ env.DAY_OF_WEEK == 'Monday' }}
         run: | # 或者使用step下载文件：suisei-cn/actions-download-file@v1
           wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
       - name: 运行py程序
@@ -169,7 +170,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #   uses: ad-m/github-push-action@master
       #   with:
       #     github_token: ${{ secrets.TOKEN }}
-      #     branch: main
+      #     branch: main # branch: ${{ github.ref }}
   # 忽略和多版本：https://github.com/actions/setup-java/blob/main/.github/workflows/build.yml
   run-java: # https://github.com/merrycodes/Office-E5/blob/main/.github/workflows/main.yml
     needs: async-gitee
@@ -195,6 +196,22 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           cache: maven
       - run: java -version
       - run: mvn -v
+      - name: 编译并运行项目
+        env:
+          BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
+          BAIDU_SU_SECRET_KEY: ${{ secrets.BAIDU_SU_SECRET_KEY }}
+          BLOG_DOMAIN: ${{ secrets.BLOG_DOMAIN }}
+        run: |
+          cd java/github-actions
+          if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
+            echo '文件存在'
+          else
+            echo '文件不存在'
+          fi
+          export TZ='Asia/Shanghai'
+          mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
+          ls target/
+          java -jar target/github-actions-0.0.1-SNAPSHOT.jar
       #- run: java -cp java HelloWorldApp
       # - name: Set up Scala 2.13.2
       #   run: |
