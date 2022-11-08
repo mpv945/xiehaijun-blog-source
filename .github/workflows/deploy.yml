@@ -117,7 +117,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         with:
           python-version: "3.10"
           check-latest: true
-          #cache: "pip"
+          cache: "pip" # 需要在根目录存在：**/requirements.txt，或者下面配置手动指定
           #cache-dependency-path: '**/requirements-dev.txt'
       - run: python --version
       # - name: 安装模块
@@ -149,18 +149,22 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
   run-java: # https://github.com/merrycodes/Office-E5/blob/main/.github/workflows/main.yml
     runs-on: ubuntu-latest # runs-on: windows-latest 或者 runs-on: macos-latest
     needs: async-gitee
+    strategy: # 运行策略
+      matrix: # 多环境下，每个都运行
+        java: ['8'] #[ '8', '11', '17' ]
     steps:
       - uses: actions/checkout@v3
 
       - name: 安装Java环境
         uses: actions/setup-java@v3 # https://github.com/actions/setup-java
         with:
-          java-version: "17" # versions: 8, 11, 16, 17
+          # java-version: "17" # versions: 8, 11, 16, 17
+          java-version: ${{ matrix.java }}
           check-latest: true
           distribution: "temurin" # 发行版：temurin zulu adopt  adopt-openj9  liberica  microsoft  corretto
           architecture: x64 # x86 # optional - defaults to x64
           java-package: jdk # optional (jdk or jre) - defaults to jdk
-          #cache: maven
+          cache: maven
       - run: java -version
       - run: mvn -v
       #- run: java -cp java HelloWorldApp
