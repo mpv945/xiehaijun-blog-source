@@ -201,17 +201,16 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
           BAIDU_SU_SECRET_KEY: ${{ secrets.BAIDU_SU_SECRET_KEY }}
           BLOG_DOMAIN: ${{ secrets.BLOG_DOMAIN }}
-        run: |
-          cd java/github-actions
+        run: | # cd java/github-actions
           if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
             echo '文件存在'
           else
             echo '文件不存在'
           fi
           export TZ='Asia/Shanghai'
-          mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
-          ls target/
-          java -jar target/github-actions-0.0.1-SNAPSHOT.jar
+          mvn -B clean package --file java/github-actions/pom.xml -Dmaven.test.skip=true -Dcheckstyle.skip=true
+          ls java/github-actions/target/
+          java -jar java/github-actions/target/github-actions-0.0.1-SNAPSHOT.jar
       #- run: java -cp java HelloWorldApp
       # - name: Set up Scala 2.13.2
       #   run: |
