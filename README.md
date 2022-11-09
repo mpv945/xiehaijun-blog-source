@@ -9,7 +9,7 @@ Example site modified from https://github.com/gohugoio/hugoBasicExample
 ### 获取actions徽章：https://blog.mafeifan.com/DevOps/GithubActions/GitHub-Actions%E7%9A%84%E5%BE%BD%E7%AB%A0%E5%9B%BE%E6%A0%87.html
 ### https://github.com/mpv945/xiehaijun-blog-source/workflows/deploy-auto-xie/badge.svg?branch=master
 
-
+## 比较最近两次差异 git diff @~..@ | grep generated.txt 或 git diff HEAD^ HEAD generated.txt[指定文件]
 ### github创建分支，点开项目分钟，输入框可以搜索和新增分支，[view all branches]能跳到分支管理：https://github.com/mpv945/xiehaijun-blog-source/branches
 ### git代理
 #### 使用http代理 
