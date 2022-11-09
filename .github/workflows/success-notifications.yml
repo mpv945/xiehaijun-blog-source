@@ -1,9 +1,11 @@
 name: success-notifications-ci
 on:
   push:
-    branches: [success-notifications]
-    #paths:
-    #  - "success-status.txt"
+    branches:
+      #  - main
+      - success-notifications
+    paths:
+      - "success-status.txt"
 jobs:
   build:
     runs-on: ubuntu-latest
