@@ -1,4 +1,4 @@
-# 使用教程 ：https://docs.github.com/cn/actions 和 环境变量等：https://wangchujiang.com/github-actions/
+# 使用教程 ：https://docs.github.com/cn/actions 和 环境变量等：https://wangchujiang.com/github-actions/ 其他ci迁移https://docs.github.com/cn/actions/migrating-to-github-actions/migrating-from-gitlab-cicd-to-github-actions
 # 插件的市场地址：https://github.com/marketplace?type=actions
 # 教程地址：https://www.imooc.com/article/322530
 # 同步到腾讯oss ： https://github.com/marketplace/actions/tencent-cos-action 和 https://github.com/marketplace/actions/tencent-cloudbase-github-action
@@ -259,10 +259,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
             staging
             !staging/**/*.md
           retention-days: 15 # 设置 5 天的自定义保留期
-      - name: 发布到GitHub-Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        run: mvn --batch-mode deploy
+      # - name: 发布到GitHub-Packages
+      # # docker 发布：https://docs.github.com/cn/actions/publishing-packages/publishing-docker-images 和 https://www.modb.pro/db/180592
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      #   run: mvn --batch-mode deploy
       # - name: Run jar
       #   env:
       #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -296,10 +297,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
   #         #branch: ${{ github.ref }}
   #         branch: success-notifications
   # https://www.geeksforgeeks.org/automated-release-for-android-using-github-actions/
-  # https://juejin.cn/post/7055958932933574669
+  # https://juejin.cn/post/7055958932933574669 和 https://blog.csdn.net/qq_41091006/article/details/124703709
   # https://www.sipios.com/blog-tech/tips-for-creating-stunning-software-releases-automatically
   # release: # https://cloud.tencent.com/developer/article/1970730 https://blog.csdn.net/pfourfire/article/details/125002425
-  #   name: Release GitHub Actions
+  # 发布网站 ：https://github.com/uiwjs/react-codemirror/blob/b5d3f38da625d7c0187e3380201b5eb751598c8b/.github/workflows/ci.yml#L1-L90
+  #   name: Release GitHub Actions 
   #   runs-on: ubuntu-latest
   #   steps:
   #     - uses: technote-space/release-github-actions@v6
