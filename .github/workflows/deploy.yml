@@ -141,7 +141,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         # if: ${{ env.DAY_OF_WEEK == 'Monday' }}
         run: | # 或者使用step下载文件：suisei-cn/actions-download-file@v1
           wget http://bj.bcebos.com/v1/yunjiasu-online/su-python-sdk-1.0.tar.gz?authorization=bce-auth-v1%2Ff186f4ec49a342aabe65ec0654d5c762%2F2019-12-02T06%3A43%3A44Z%2F-1%2F%2Fde8d8e6389a9b208b6da5a817deea8b8012da982449d4921b9afe53d6839fc3a -O /home/runner/.cache/pip/su-python-sdk.tar.gz
-      - name: 运行py程序
+      - name: 运行py程序  # 运行api接口程序：python python/purge_cdn_cache.py
         #shell: bash
         env:
           BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
@@ -156,7 +156,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           export TZ='Asia/Shanghai'
           ls -all /home/runner/.cache/pip/
           pip install /home/runner/.cache/pip/su-python-sdk.tar.gz
-          python python/purge_cdn_cache.py
+          
       # - name: 暂存提交
       #   env:
       #     NAME: merrycodes
@@ -207,6 +207,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
           BAIDU_SU_SECRET_KEY: ${{ secrets.BAIDU_SU_SECRET_KEY }}
           BLOG_DOMAIN: ${{ secrets.BLOG_DOMAIN }}
+        # 运行api接口程序：java -jar java/github-actions/target/github-actions-0.0.1-SNAPSHOT.jar
         run: | # cd java/github-actions # maven指定仓库：-Dmaven.repo.local=/home/juven/ci/foo-repo/
           if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
             echo '文件存在'
@@ -216,7 +217,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           export TZ='Asia/Shanghai'
           mvn -B clean package --file java/github-actions/pom.xml -Dmaven.test.skip=true -Dcheckstyle.skip=true
           ls java/github-actions/target/
-          java -jar java/github-actions/target/github-actions-0.0.1-SNAPSHOT.jar
+          
           mkdir staging && cp java/github-actions/target/*.jar staging
       #- run: java -cp java HelloWorldApp
       # - name: Set up Scala 2.13.2
@@ -275,3 +276,4 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
   #   steps:
   #     - uses: technote-space/release-github-actions@v6
   # 微信通知 https://github.com/marketplace/actions/github-action-for-wechat-work
+  # k8s https://blog.csdn.net/u012803274/article/details/115839349
