@@ -253,6 +253,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           ls java/github-actions/target/
           
           mkdir staging && cp java/github-actions/target/*.jar staging/
+      # 发布Packages 官网教程：https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
       - name: Publish to GitHub Packages # 发布到maven服务：https://juejin.cn/post/7102428103196016671
         run:  mvn --batch-mode deploy --file java/github-actions/pom.xml -Dmaven.test.skip=true # -Prelease-github
         env:
