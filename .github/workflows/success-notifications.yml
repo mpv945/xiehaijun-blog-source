@@ -1,4 +1,4 @@
-name: blog-ci
+name: success-notifications-ci
 on:
   push:
     branches: [success-notifications]
