@@ -1,4 +1,4 @@
-# 使用教程 ：https://docs.github.com/cn/actions
+# 使用教程 ：https://docs.github.com/cn/actions 和 环境变量等：https://wangchujiang.com/github-actions/
 # 插件的市场地址：https://github.com/marketplace?type=actions
 # 教程地址：https://www.imooc.com/article/322530
 # 同步到腾讯oss ： https://github.com/marketplace/actions/tencent-cos-action 和 https://github.com/marketplace/actions/tencent-cloudbase-github-action
@@ -251,14 +251,18 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #     mvn --batch-mode --update-snapshots verify
       #     mvn --batch-mode --update-snapshots package
       #     mkdir staging && cp target/*.jar staging
-      - name: 上传制品
+      - name: 上传制品 # 可以在其他job下下载共享
         uses: actions/upload-artifact@v3 # https://docs.github.com/cn/actions/using-workflows/storing-workflow-data-as-artifacts
         with:
-          name: baidu-su-api-runJar
+          name: baidu-su-artifact
           path: |
             staging
             !staging/**/*.md
           retention-days: 15 # 设置 5 天的自定义保留期
+      - name: 发布到GitHub-Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        run: mvn --batch-mode deploy
       # - name: Run jar
       #   env:
       #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
