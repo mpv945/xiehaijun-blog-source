@@ -120,10 +120,23 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         with:
           python-version: "2.7"
           check-latest: true
-          cache: "pip" # 需要在根目录存在：**/requirements.txt，或者下面配置手动指定
+          #cache: "pip" # 需要在根目录存在：**/requirements.txt，或者下面配置手动指定
           #cache-dependency-path: '**/requirements-dev.txt'
-          update-environment: true
+          #update-environment: true
       - run: python --version
+      - name: 开启缓存
+        id: cache-python
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-python-modules
+        with:
+          path: ~/.cache/pip
+          #key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: | # 允许您指定在缓存未命中时使用的备用还原键列表key
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: 安装模块
         run: | # apt install wget -y
           python -m pip install --upgrade pip
@@ -199,9 +212,22 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           distribution: "temurin" # 发行版：temurin zulu adopt  adopt-openj9  liberica  microsoft  corretto
           architecture: x64 # x86 # optional - defaults to x64
           java-package: jdk # optional (jdk or jre) - defaults to jdk
-          cache: maven # actions/cache@v1 缓存组件
+          # cache: maven # actions/cache@v1 缓存组件
       - run: java -version
       - run: mvn -v
+      - name: 开启缓存
+        id: cache-java
+        uses: actions/cache@v3 # 使用 https://docs.github.com/cn/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+        env:
+          cache-name: cache-java-modules
+        with:
+          path: ~/.m2/repository
+          #key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: | # 允许您指定在缓存未命中时使用的备用还原键列表key
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: 编译并运行项目
         env:
           BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
