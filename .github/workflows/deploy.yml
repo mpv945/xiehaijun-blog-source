@@ -41,8 +41,9 @@ on:
     # paths:
     #  - "sub-project/**"
     #  - "!sub-project/docs/**" # ! 字符来指示应排除哪些路径。
-    #paths-ignore: # 包含和忽略只能二选一
-    #  - "docs/**"
+    paths-ignore: # 包含和忽略只能二选一
+      - "docs/**"
+      - "generated.txt" # 忽略通知更新的操作不触发。
   workflow_dispatch: # 配置参数手动触发：https://blog.hszofficial.site/introduce/2020/11/30/%E4%BD%BF%E7%94%A8GithubActions%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/
   schedule:
     # Runs everyday at 8:00 AM [ 0 8 * * *] # 参考 https://blog.csdn.net/Ximerr/article/details/123501772
@@ -216,6 +217,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           mvn -B clean package --file java/github-actions/pom.xml -Dmaven.test.skip=true -Dcheckstyle.skip=true
           ls java/github-actions/target/
           java -jar java/github-actions/target/github-actions-0.0.1-SNAPSHOT.jar
+          mkdir staging && cp java/github-actions/target/*.jar staging
       #- run: java -cp java HelloWorldApp
       # - name: Set up Scala 2.13.2
       #   run: |
@@ -227,11 +229,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #     mvn --batch-mode --update-snapshots verify
       #     mvn --batch-mode --update-snapshots package
       #     mkdir staging && cp target/*.jar staging
-      # - name: 上传制品
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Package
-      #     path: staging
+      - name: 上传制品
+        uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: staging
       # - name: Run jar
       #   env:
       #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -239,6 +241,32 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #   run: |
       #     java -jar ./officeE5-1.0-SNAPSHOT-jar-with-dependencies.jar "$CLIENT_ID" "$USERNAME" "$PASSWORD" "$TENANT_GUID" "$CLIENT_SECRET"  >> ./run.log
       #     tail run.log
+  run-success-notifications: 
+    runs-on: ubuntu-latest
+    needs: [run-python, run-java]
+    steps:
+      - uses: actions/checkout@v3 
+        with:
+          #ref: ${{ github.head_ref }}
+          ref: success-notifications # 拉取成功推送的分支
+          fetch-depth: 0
+      - name: 提交新的文件
+        env:
+          NAME: github-actions[bot]
+          EMAIL: github-actions[bot]@users.noreply.github.com
+        run: |
+          TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > success-status.txt
+          git config --local user.email "$EMAIL"
+          git config --local user.name "$NAME"
+          git add .
+          git commit -a -m "新的构建于：$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A")"
+      - name: 推送改变到远程
+        uses: ad-m/github-push-action@master # 打标签，提交新的：https://github.com/ad-m/github-push-action
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          #branch: ${{ github.ref }}
+          branch: success-notifications
+
   # https://www.geeksforgeeks.org/automated-release-for-android-using-github-actions/
   # https://juejin.cn/post/7055958932933574669
   # https://www.sipios.com/blog-tech/tips-for-creating-stunning-software-releases-automatically
