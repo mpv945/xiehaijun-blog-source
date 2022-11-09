@@ -46,6 +46,16 @@
         </dependency>-->
     </dependencies>
 
+
+    <!--发布到github packages需要配置-->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/octocat/hello-world</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
