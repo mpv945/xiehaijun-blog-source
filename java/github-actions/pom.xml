@@ -47,12 +47,12 @@
     </dependencies>
 
 
-    <!--发布到github packages需要配置-->
+    <!--发布到github packages需要配置： mpv945/xiehaijun-blog-source  组织名为“mpv945”并且您的存储库名为“xiehaijun-blog-source” -->
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/octocat/hello-world</url>
+            <url>https://maven.pkg.github.com/mpv945/xiehaijun-blog-source</url>
         </repository>
     </distributionManagement>
 
