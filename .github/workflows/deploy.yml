@@ -235,16 +235,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           BLOG_DOMAIN: ${{ secrets.BLOG_DOMAIN }}
         # 运行api接口程序：java -jar java/github-actions/target/github-actions-0.0.1-SNAPSHOT.jar
         run: | # cd java/github-actions # maven指定仓库：-Dmaven.repo.local=/home/juven/ci/foo-repo/
-          if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
-            echo '文件存在'
-          else
-            echo '文件不存在'
-          fi
           export TZ='Asia/Shanghai'
           mvn -B clean package --file java/github-actions/pom.xml -Dmaven.test.skip=true -Dcheckstyle.skip=true
           ls java/github-actions/target/
           
-          mkdir staging && cp java/github-actions/target/*.jar staging
+          mkdir staging && cp java/github-actions/target/*.jar staging/
       #- run: java -cp java HelloWorldApp
       # - name: Set up Scala 2.13.2
       #   run: |
@@ -257,10 +252,13 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #     mvn --batch-mode --update-snapshots package
       #     mkdir staging && cp target/*.jar staging
       - name: 上传制品
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3 # https://docs.github.com/cn/actions/using-workflows/storing-workflow-data-as-artifacts
         with:
-          name: Package
-          path: staging
+          name: baidu-su-api-runJar
+          path: |
+            staging
+            !staging/**/*.md
+          retention-days: 15 # 设置 5 天的自定义保留期
       # - name: Run jar
       #   env:
       #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
