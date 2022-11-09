@@ -253,8 +253,8 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           ls java/github-actions/target/
           
           mkdir staging && cp java/github-actions/target/*.jar staging/
-      - name: Publish to GitHub Packages
-        run:  mvn --batch-mode deploy --file java/github-actions/pom.xml -Dmaven.test.skip=true -Prelease-github
+      - name: Publish to GitHub Packages # 发布到maven服务：https://juejin.cn/post/7102428103196016671
+        run:  mvn --batch-mode deploy --file java/github-actions/pom.xml -Dmaven.test.skip=true # -Prelease-github
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       #- run: java -cp java HelloWorldApp
@@ -336,7 +336,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           cat ./md5.txt
           cp ./md5.txt build/
       - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@v2 # 参考 https://github.com/p4gefau1t/trojan-go/blob/master/.github/workflows/release-build.yml
         with:
           repo_token: ${{ secrets.PERSONAL_TOKEN }}
           file: ./md5.txt
@@ -344,6 +344,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           tag: ${{ github.ref }}
           overwrite: true
           body: "测试发布"
+          # 多语言 https://github.com/svenstaro/upload-release-action
+          # repo_token: ${{ secrets.GITHUB_TOKEN }}
+          # file: target/release/${{ matrix.artifact_name }}
+          # asset_name: ${{ matrix.asset_name }}
+          # tag: ${{ github.ref }}
       # - name: 贡献者列表图片生成 # https://github.com/jaywcjlove/github-action-contributors
       #   uses: jaywcjlove/github-action-contributors@main
       #   with:
