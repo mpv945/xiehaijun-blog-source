@@ -331,46 +331,55 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         run: |
           cat ./md5.txt
           cp ./md5.txt build/
-      - name: 贡献者列表图片生成 # https://github.com/jaywcjlove/github-action-contributors
-        uses: jaywcjlove/github-action-contributors@main
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
-          output: build/CONTRIBUTORS.svg
-          avatarSize: 42
-      - name: 创建git的tag标签
-        id: create_tag
-        uses: jaywcjlove/create-tag-action@main
-        with:
-          #package-path: ./package.json # 根据文件是否修改，生成新的tag
-          package-path: build/md5.txt
-          token: ${{ secrets.PERSONAL_TOKEN  }} # 要有创建tag的权限，
-          # test: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}' # 根据提交命令来获取
-      - name: Deploy贡献者列表图片到Page
-        uses: peaceiris/actions-gh-pages@v3 # 图片地址：https://mpv945.github.io/项目名/CONTRIBUTORS.svg，放到自己项目下，和上面不一样
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./build
-          commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
-      - name: 生成更新日志
-        id: changelog
-        uses: jaywcjlove/changelog-generator@main
-        if: steps.create_tag.outputs.successful
-        with:
-          head-ref: ${{steps.create_tag.outputs.version}}
-          filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|Renovate Bot)
-          filter: (^[\s]+?[R|r]elease)|(^[R|r]elease)
-      - name: Create Release
-        uses: ncipollo/release-action@v1 # 参考 https://github.com/uiwjs/react-codemirror/blob/b5d3f38da625d7c0187e3380201b5eb751598c8b/.github/workflows/ci.yml#L1-L90
-        if: steps.create_tag.outputs.successful
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ steps.create_tag.outputs.version }}
-          tag: ${{ steps.create_tag.outputs.version }}
-          body: |
-            ```bash
-            npm i @uiw/react-heat-map@${{steps.create_tag.outputs.versionNumber}}
-            ```
-            ${{ steps.changelog.outputs.compareurl }}
-            ${{ steps.changelog.outputs.changelog }}
+          repo_token: ${{ secrets.PERSONAL_TOKEN }}
+          file: ./md5.txt
+          asset_name: md5
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "测试发布"
+      # - name: 贡献者列表图片生成 # https://github.com/jaywcjlove/github-action-contributors
+      #   uses: jaywcjlove/github-action-contributors@main
+      #   with:
+      #     filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
+      #     output: build/CONTRIBUTORS.svg
+      #     avatarSize: 42
+      # - name: 创建git的tag标签
+      #   id: create_tag
+      #   uses: jaywcjlove/create-tag-action@main
+      #   with:
+      #     #package-path: ./package.json # 根据文件是否修改，生成新的tag
+      #     package-path: ./md5.txt
+      #     token: ${{secrets.PERSONAL_TOKEN}} # 要有创建tag的权限，
+      #     # test: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}' # 根据提交命令来获取
+      # - name: Deploy贡献者列表图片到Page
+      #   uses: peaceiris/actions-gh-pages@v3 # 图片地址：https://mpv945.github.io/项目名/CONTRIBUTORS.svg，放到自己项目下，和上面不一样
+      #   with:
+      #     github_token: ${{ secrets.PERSONAL_TOKEN }}
+      #     publish_dir: ./build
+      #     commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
+      # - name: 生成更新日志
+      #   id: changelog
+      #   uses: jaywcjlove/changelog-generator@main
+      #   if: steps.create_tag.outputs.successful
+      #   with:
+      #     head-ref: ${{steps.create_tag.outputs.version}}
+      #     filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|Renovate Bot)
+      #     filter: (^[\s]+?[R|r]elease)|(^[R|r]elease)
+      # - name: Create Release
+      #   uses: ncipollo/release-action@v1 # 参考 https://github.com/uiwjs/react-codemirror/blob/b5d3f38da625d7c0187e3380201b5eb751598c8b/.github/workflows/ci.yml#L1-L90
+      #   if: steps.create_tag.outputs.successful
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     name: ${{ steps.create_tag.outputs.version }}
+      #     tag: ${{ steps.create_tag.outputs.version }}
+      #     body: |
+      #       ```bash
+      #       npm i @uiw/react-heat-map@${{steps.create_tag.outputs.versionNumber}}
+      #       ```
+      #       ${{ steps.changelog.outputs.compareurl }}
+      #       ${{ steps.changelog.outputs.changelog }}
   # 微信通知 https://github.com/marketplace/actions/github-action-for-wechat-work
   # k8s https://blog.csdn.net/u012803274/article/details/115839349
