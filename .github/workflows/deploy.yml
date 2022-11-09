@@ -330,6 +330,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       - shell: bash
         run: |
           cat ./md5.txt
+          cp ./md5.txt build/
       - name: 贡献者列表图片生成 # https://github.com/jaywcjlove/github-action-contributors
         uses: jaywcjlove/github-action-contributors@main
         with:
@@ -341,7 +342,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         uses: jaywcjlove/create-tag-action@main
         with:
           #package-path: ./package.json # 根据文件是否修改，生成新的tag
-          package-path: ./md5.txt
+          package-path: build/md5.txt
           # test: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}' # 根据提交命令来获取
       - name: Deploy贡献者列表图片到Page
         uses: peaceiris/actions-gh-pages@v3 # 图片地址：https://mpv945.github.io/项目名/CONTRIBUTORS.svg，放到自己项目下，和上面不一样
