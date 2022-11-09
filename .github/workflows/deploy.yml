@@ -241,44 +241,31 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #   run: |
       #     java -jar ./officeE5-1.0-SNAPSHOT-jar-with-dependencies.jar "$CLIENT_ID" "$USERNAME" "$PASSWORD" "$TENANT_GUID" "$CLIENT_SECRET"  >> ./run.log
       #     tail run.log
-  run-success-notifications: 
-    runs-on: ubuntu-latest
-    needs: [run-python, run-java]
-    steps:
-      - uses: actions/checkout@v3 
-        with:
-          #ref: ${{ github.head_ref }}
-          ref: success-notifications # 拉取成功推送的分支
-          fetch-depth: 0
-      - name: 提交新的文件
-        env:
-          NAME: mpv945
-          EMAIL: zhenxindefeng@126.com
-        run: |
-          TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > success-status.txt
-          git config --local user.email "$EMAIL"
-          git config --local user.name "$NAME"
-          git add .
-          git commit -a -m "新的构建于：$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A")"
-      - name: 推送改变到远程
-        uses: ad-m/github-push-action@master # 打标签，提交新的：https://github.com/ad-m/github-push-action
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
-          #branch: ${{ github.ref }}
-          branch: success-notifications
-  run-success-notifications-2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: success-notifications # 拉取master分支代码，推送到master
-      - run: |
-          TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > success-status.txt
-          git config user.name mpv945
-          git config user.email zhenxindefeng@126.com
-          git add success-status.txt
-          git commit -m "$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A") master自动部署完成，通知流处理提交的更新。[跳过的自动化提交]"
-          git push
+  # run-success-notifications: 
+  #   runs-on: ubuntu-latest
+  #   needs: [run-python, run-java]
+  #   steps:
+  #     - uses: actions/checkout@v3 
+  #       with:
+  #         #ref: ${{ github.head_ref }}
+  #         ref: success-notifications # 拉取成功推送的分支
+  #         fetch-depth: 0
+  #     - name: 提交新的文件
+  #       env:
+  #         NAME: mpv945
+  #         EMAIL: zhenxindefeng@126.com
+  #       run: |
+  #         TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > success-status.txt
+  #         git config --local user.email "$EMAIL"
+  #         git config --local user.name "$NAME"
+  #         git add .
+  #         git commit -a -m "新的构建于：$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A")"
+  #     - name: 推送改变到远程
+  #       uses: ad-m/github-push-action@master # 打标签，提交新的：https://github.com/ad-m/github-push-action
+  #       with:
+  #         github_token: ${{ secrets.PERSONAL_TOKEN }}
+  #         #branch: ${{ github.ref }}
+  #         branch: success-notifications
   # https://www.geeksforgeeks.org/automated-release-for-android-using-github-actions/
   # https://juejin.cn/post/7055958932933574669
   # https://www.sipios.com/blog-tech/tips-for-creating-stunning-software-releases-automatically
