@@ -173,12 +173,17 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #     branch: main # branch: ${{ github.ref }}
   # 忽略和多版本：https://github.com/actions/setup-java/blob/main/.github/workflows/build.yml
   run-java: # https://github.com/merrycodes/Office-E5/blob/main/.github/workflows/main.yml
-    needs: async-gitee
+    needs: async-gitee # 多语言编译测试：https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
     strategy: # 运行策略
       fail-fast: false
       matrix: # 多环境下，每个都运行
         os: [ubuntu-latest] # [macos-latest, ubuntu-latest, windows-latest]
         java: ['8'] #[ '8', '11', '17' ]
+        exclude:
+          - os: macos-latest
+            python-version: '3.8'
+          - os: windows-latest
+            python-version: '3.6'
     #runs-on: ubuntu-latest # runs-on: windows-latest 或者 runs-on: macos-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -193,7 +198,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           distribution: "temurin" # 发行版：temurin zulu adopt  adopt-openj9  liberica  microsoft  corretto
           architecture: x64 # x86 # optional - defaults to x64
           java-package: jdk # optional (jdk or jre) - defaults to jdk
-          cache: maven
+          cache: maven # actions/cache@v1 缓存组件
       - run: java -version
       - run: mvn -v
       - name: 编译并运行项目
@@ -201,7 +206,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           BAIDU_SU_ACCESS_KEY: ${{ secrets.BAIDU_SU_ACCESS_KEY }}
           BAIDU_SU_SECRET_KEY: ${{ secrets.BAIDU_SU_SECRET_KEY }}
           BLOG_DOMAIN: ${{ secrets.BLOG_DOMAIN }}
-        run: | # cd java/github-actions
+        run: | # cd java/github-actions # maven指定仓库：-Dmaven.repo.local=/home/juven/ci/foo-repo/
           if test -f "/home/runner/.cache/pip/su-python-sdk.tar.gz"; then
             echo '文件存在'
           else

@@ -3,6 +3,8 @@ author: Xie Haijun
 title: 自建博客 - 初识HUGO
 description: Hugo 是 Go 编写的静态网站生成器，速度快，易用，可配置。依赖于 Markdown 文件，Hugo 只需要几分之一秒就可以渲染一个经典的中型网站，最好网站的每个部分渲染只需 1 毫秒。Hugo 非常适合博客，文档等等网站的生成。
 date: 2022-11-07T00:56:00+08:00
+lastmod: 2022-11-09
+keywords: [ "Hugo", "keyword" ]
 slug: blog-1-chinese
 image: https://images.ewancle.com/blog/imghugo-what.png
 # 如果要在该帖子/页面中使用库，请使用前面的参数 math。
