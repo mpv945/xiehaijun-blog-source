@@ -43,7 +43,7 @@ on:
     #  - "!sub-project/docs/**" # ! 字符来指示应排除哪些路径。
     #paths-ignore: # 包含和忽略只能二选一
     #  - "docs/**"
-  #workflow_dispatch: # 配置参数手动触发：https://blog.hszofficial.site/introduce/2020/11/30/%E4%BD%BF%E7%94%A8GithubActions%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/
+  workflow_dispatch: # 配置参数手动触发：https://blog.hszofficial.site/introduce/2020/11/30/%E4%BD%BF%E7%94%A8GithubActions%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81/
   schedule:
     # Runs everyday at 8:00 AM [ 0 8 * * *] # 参考 https://blog.csdn.net/Ximerr/article/details/123501772
     # Settings --> Branches 【生效必须把默认分支设置成工作流所在的分支，时间是UTC时间，中国时间加8】
@@ -179,11 +179,11 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       matrix: # 多环境下，每个都运行
         os: [ubuntu-latest] # [macos-latest, ubuntu-latest, windows-latest]
         java: ['8'] #[ '8', '11', '17' ]
-        exclude:
-          - os: macos-latest
-            python-version: '3.8'
-          - os: windows-latest
-            python-version: '3.6'
+        # exclude:
+        #   - os: macos-latest
+        #     python-version: '3.8'
+        #   - os: windows-latest
+        #     python-version: '3.6'
     #runs-on: ubuntu-latest # runs-on: windows-latest 或者 runs-on: macos-latest
     runs-on: ${{ matrix.os }}
     steps:
