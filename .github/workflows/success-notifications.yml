@@ -4,17 +4,17 @@ on:
     branches: [success-notifications]
   paths:
     - "success-status.txt"
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: master # 拉取master分支代码，推送到master
-      - run: |
-          TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > generated.txt
-          git config user.name mpv945
-          git config user.email zhenxindefeng@126.com
-          git add generated.txt
-          git commit -m "$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A") master自动部署完成，通知流处理提交的更新。[跳过的自动化提交]"
-          git push
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            ref: master # 拉取master分支代码，推送到master
+        - run: |
+            TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > generated.txt
+            git config user.name mpv945
+            git config user.email zhenxindefeng@126.com
+            git add generated.txt
+            git commit -m "$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A") master自动部署完成，通知流处理提交的更新。[跳过的自动化提交]"
+            git push
