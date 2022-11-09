@@ -253,6 +253,10 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ å
           ls java/github-actions/target/
           
           mkdir staging && cp java/github-actions/target/*.jar staging/
+      - name: Publish to GitHub Packages
+        run:  mvn --batch-mode deploy --file java/github-actions/pom.xml -Dmaven.test.skip=true -Prelease-github
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       #- run: java -cp java HelloWorldApp
       # - name: Set up Scala 2.13.2
       #   run: |
