@@ -1,4 +1,6 @@
 Example site modified from https://github.com/gohugoio/hugoBasicExample
+## 整个流程运行的提交说明： git commit -m '发布博客-->同步代码-->[python清除缓存 , java清除缓存]-->发布release'
+
 
 # VSCode 代码格式化 快捷键 (安装插件：https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 ### On Windows：Shift + Alt + F

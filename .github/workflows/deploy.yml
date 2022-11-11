@@ -187,7 +187,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           export TZ='Asia/Shanghai'
           ls -all /home/runner/.cache/pip/
           pip install /home/runner/.cache/pip/su-python-sdk.tar.gz
-          
+          python python/purge_cdn_cache.py
       # - name: 暂存提交
       #   env:
       #     NAME: merrycodes
@@ -257,7 +257,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           export TZ='Asia/Shanghai'
           mvn -B clean package --file java/github-actions/pom.xml -Dmaven.test.skip=true -Dcheckstyle.skip=true
           ls java/github-actions/target/
-          
+          java -jar java/github-actions/target/github-actions-0.0.1-SNAPSHOT.jar
           mkdir staging && cp java/github-actions/target/*.jar staging/
       # 发布Packages 官网教程：https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
       - name: Publish to GitHub Packages # 发布到maven服务：https://juejin.cn/post/7102428103196016671
@@ -343,7 +343,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         run: |
           cat ./md5.txt
           cp ./md5.txt build/
-      - name: 生成release的tag名称
+      - name: 生成release的tag名称 # 多任务之间参数传递：https://wangchujiang.com/github-actions/
         run: |
           echo "TAG_NAME=release_$(TZ=Asia/Shanghai date '+%Y-%m-%d-%H_%M_%S')" >> $GITHUB_ENV
         #  git fetch --depth=1 origin +refs/tags/*:refs/tags/*
