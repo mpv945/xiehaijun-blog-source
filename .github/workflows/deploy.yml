@@ -69,7 +69,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         with:
           submodules: true # 下载子项目,默认不会下载子模块
           fetch-depth: 0 # 目录层级
-      - name: 打包目录做md5 # https://www.z1987.com/blog/detail/f9e91ec51d1492d18d249636919154cc
+      - name: 打包目录做md5 # 表决文件夹内容是否改变过。https://www.z1987.com/blog/detail/f9e91ec51d1492d18d249636919154cc
         run: |
           tar -c content/ | gzip -n > content.tar.gz
           mkdir -p staging
