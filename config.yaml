@@ -56,12 +56,12 @@ params:
 
     footer:
         since: 2022
-        customText:
+        customText: # 通过action下载到static目录，能直接访问
             <a href="https://beian.miit.gov.cn/" target="_blank">备案号</a>
             <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备19013893号-1</a>
             <br />
             <a href="https://github.com/mpv945/xiehaijun-blog-source/actions" target="_blank">
-               <img src="https://github.com/mpv945/xiehaijun-blog-source/workflows/blog-ci/badge.svg?branch=master">
+               <img src="https://www.ewancle.com/badge.svg">
             </a>
 
     dateFormat:

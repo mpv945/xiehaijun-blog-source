@@ -58,8 +58,9 @@ env:
 jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ 前端 https://bbs.huaweicloud.com/blogs/337454
   build-and-deploy:
     runs-on: ubuntu-latest
-    # if: "contains(github.event.head_commit.message, '[build]')" # 只有git message中包含[build]才触发构建，否则跳过
-    #if: "! contains(github.event.head_commit.message, 'wip')"
+    if: "contains(github.event.head_commit.message, '发布博客')" # 只有git message中包含[build]才触发构建，否则跳过
+    # if: ${{ (needs.rules.outputs.branch_name != 'production') || (needs.rules.outputs.branch_name != 'staging') }}
+    #if: "! contains(github.event.head_commit.message, 'wip')" 
     # if: github.event.repository.owner.id == github.event.sender.id # 自己star启动
     # if: github.event.schedule != '30 5 * * 1,3'
     steps:
