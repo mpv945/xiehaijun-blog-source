@@ -9,6 +9,8 @@ Example site modified from https://github.com/gohugoio/hugoBasicExample
 
 ### 判断git最近两次是否有差异，有就返回1，没有返回0 ： git diff --quiet HEAD^ HEAD -- ./generated.txt（参考：https://nickjanetakis.com/blog/git-diff-has-a-quiet-flag-to-halt-a-script-if-a-file-was-updated）
 ### https://vercel.com/ 部署的api有100次的api限制。 【Ignored Build Step】 可以添加上面来忽略构建
+### 通过消息内容控制 https://vercel.com/mpv945/xiehaijun-blog-source/deployments 的忽略条件
+### 参考grep结合git show使用： https://www.cnblogs.com/jkin/p/11356510.html  : 使用 git show | grep -q '发布博客' 然后使用echo $? 查看是否匹配到，0表示匹配到，1表示没有匹配到。
 
 ### 获取actions徽章：https://blog.mafeifan.com/DevOps/GithubActions/GitHub-Actions%E7%9A%84%E5%BE%BD%E7%AB%A0%E5%9B%BE%E6%A0%87.html
 ### https://github.com/mpv945/xiehaijun-blog-source/workflows/deploy-auto-xie/badge.svg?branch=master
