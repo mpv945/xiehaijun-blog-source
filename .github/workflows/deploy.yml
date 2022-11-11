@@ -102,6 +102,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           CNAME: www.ewancle.com
           commit_message: ${{ github.event.head_commit.message }}
   async-gitee:
+    if: "contains(github.event.head_commit.message, '同步代码')"
     runs-on: ubuntu-latest
     needs: build-and-deploy
     steps:
@@ -124,6 +125,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           branch: main
           https: true
   run-python: # https://www.csdn.net/tags/MtTaMg0sMTk3MTcwLWJsb2cO0O0O.html
+    if: "contains(github.event.head_commit.message, 'python清除缓存')"
     runs-on: ubuntu-latest
     needs: async-gitee
     steps:
@@ -203,6 +205,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
       #     branch: main # branch: ${{ github.ref }}
   # 忽略和多版本：https://github.com/actions/setup-java/blob/main/.github/workflows/build.yml
   run-java: # https://github.com/merrycodes/Office-E5/blob/main/.github/workflows/main.yml
+    if: "contains(github.event.head_commit.message, 'java清除缓存')"
     needs: async-gitee # 多语言编译测试：https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
     strategy: # 运行策略
       fail-fast: false
@@ -327,6 +330,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
   #   steps:
   #     - uses: technote-space/release-github-actions@v6
   run-release: 
+    if: "contains(github.event.head_commit.message, '发布release')"
     runs-on: ubuntu-latest
     needs: [run-python, run-java]
     steps:
@@ -339,13 +343,21 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         run: |
           cat ./md5.txt
           cp ./md5.txt build/
+      - name: 生成release的tag名称
+        run: |
+          echo "TAG_NAME=release_$(TZ=Asia/Shanghai date '+%Y-%m-%d-%H_%M_%S')" >> $GITHUB_ENV
+        #  git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        #  tag_name="${GITHUB_REF##*/}"
+        #  echo Tag $tag_name
+        #  git checkout $tag_name
+        #  echo "TAG_NAME=${tag_name}" >> $GITHUB_ENV
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2 # 参考 https://github.com/p4gefau1t/trojan-go/blob/master/.github/workflows/release-build.yml
         with:
           repo_token: ${{ secrets.PERSONAL_TOKEN }}
           file: ./md5.txt
           asset_name: md5
-          tag: ${{ github.ref }}
+          tag: ${{ env.TAG_NAME }}
           overwrite: true
           body: "测试发布"
           # 多语言 https://github.com/svenstaro/upload-release-action
