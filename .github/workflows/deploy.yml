@@ -92,7 +92,7 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
         # run: hugo
         run: |
           ls ./content -all
-          sed -e "s/#BUILD_TIME/$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')/g" -i.bak ./content/**/*.md && hugo --minify
+          find ./content/ -name '*.md' -exec grep -li '#BUILD_TIME' {} \; | xargs sed -e "s/#BUILD_TIME/$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')/g" -i.bak  && hugo --minify
       - name: 部署静态-GitHub
         uses: peaceiris/actions-gh-pages@v3 # https://github.com/peaceiris/actions-gh-pages
         with:
