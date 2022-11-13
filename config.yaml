@@ -74,7 +74,7 @@ params:
 
     sidebar:
         emoji: 🍥
-        subtitle: ["&emsp;少年投身IT行,老来无伴又何妨。","擦肩美女不屑看,三千码友在身旁。","高山流水觅知己,千里之外寻？？。"]
+        subtitle: ["&emsp;少年投身IT行,一事无成又何妨。","擦肩美女不屑看,三千码友在身旁。","高山流水觅知己,千里之外寻？？。"]
         avatar:
             enabled: true
             # local 如果true，头像图像应该放在assets/${avatar.src}，这允许主题自动调整图像大小。

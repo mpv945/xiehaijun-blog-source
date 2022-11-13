@@ -47,27 +47,30 @@ tags_weight: 1
 
 1. 下载所需[风格](https://gohugo.io/installation/windows/#flavors)、操作系统和架构的存档（Hugo 有两种：标准版和扩展版。扩展版支持 编码 WebP 图像 和  使用嵌入式 LibSass 转译器将 Sass 转译为 CSS。建议安装扩展版。
 
-   > *[Hugo预编 - 全平台最新版本](https://github.com/gohugoio/hugo/releases)*  
-   > hugo_0.105.0_darwin-universal.tar.gz - 标准版：苹果Mac OS系统（适用M1和X86）  
-   > hugo_0.105.0_dragonfly-amd64.tar.gz - 标准版：*DragonFly* BSD（适用英特尔和AMD）  
-   > hugo_0.105.0_freebsd-amd64.tar.gz - 标准版：freebsd  BSD（适用英特尔和AMD）  
-   > hugo_0.105.0_Linux-64bit.tar.gz - 标准版：通用Linux（适用英特尔和AMD）  
-   > hugo_0.105.0_linux-amd64.deb - 标准版：Debian/Ubuntu（适用英特尔和AMD）  
-   > hugo_0.105.0_linux-amd64.tar.gz - 标准版：通用Linux（适用英特尔和AMD）  
-   > hugo_0.105.0_linux-arm.tar.gz - 标准版：通用Linux（ARM芯片）  
-   > hugo_0.105.0_linux-arm64.deb - 标准版：Debian/Ubuntu（ARM芯片）  
-   > hugo_0.105.0_linux-arm64.tar.gz - 标准版：通用Linux（ARM芯片）  
-   > hugo_0.105.0_netbsd-amd64.tar.gz - 标准版：netbsd（适用英特尔和AMD） 
-   > hugo_0.105.0_openbsd-amd64.tar.gz - 标准版：openbsd（适用英特尔和AMD）  
-   > hugo_0.105.0_windows-amd64.zip - 标准版：Windows（适用英特尔和AMD）  
-   > hugo_0.105.0_windows-arm64.zip - 标准版：Windows（ARM芯片）  
-   > hugo_extended_0.105.0_darwin-universal.tar.gz - 扩展版：苹果Mac OS系统（适用M1和英特尔）  
-   > hugo_extended_0.105.0_Linux-64bit.tar.gz - 扩展版：通用Linux（适用英特尔和AMD）  
-   > hugo_extended_0.105.0_linux-amd64.deb - 扩展版：Debian/Ubuntu（适用英特尔和AMD）  
-   > hugo_extended_0.105.0_linux-amd64.tar.gz - 扩展版：通用Linux（适用英特尔和AMD）  
-   > hugo_extended_0.105.0_linux-arm64.deb - 扩展版：Debian/Ubuntu（ARM）  
-   > hugo_extended_0.105.0_linux-arm64.tar.gz - 扩展版：通用Linux（ARM）  
-   > hugo_extended_0.105.0_windows-amd64.zip - 扩展版：Windows（适用英特尔和AMD）    
+   > *[Hugo预编 - 全平台最新版本](https://github.com/gohugoio/hugo/releases)* 
+   
+   ```
+   hugo_0.105.0_darwin-universal.tar.gz - 标准版：苹果Mac OS系统（适用M1和X86）  
+   hugo_0.105.0_dragonfly-amd64.tar.gz - 标准版：*DragonFly* BSD（适用英特尔和AMD）  
+   hugo_0.105.0_freebsd-amd64.tar.gz - 标准版：freebsd  BSD（适用英特尔和AMD）  
+   hugo_0.105.0_Linux-64bit.tar.gz - 标准版：通用Linux（适用英特尔和AMD）  
+   hugo_0.105.0_linux-amd64.deb - 标准版：Debian/Ubuntu（适用英特尔和AMD）  
+   hugo_0.105.0_linux-amd64.tar.gz - 标准版：通用Linux（适用英特尔和AMD）  
+   hugo_0.105.0_linux-arm.tar.gz - 标准版：通用Linux（ARM芯片）  
+   hugo_0.105.0_linux-arm64.deb - 标准版：Debian/Ubuntu（ARM芯片）  
+   hugo_0.105.0_linux-arm64.tar.gz - 标准版：通用Linux（ARM芯片）  
+   hugo_0.105.0_netbsd-amd64.tar.gz - 标准版：netbsd（适用英特尔和AMD） 
+   hugo_0.105.0_openbsd-amd64.tar.gz - 标准版：openbsd（适用英特尔和AMD）  
+   hugo_0.105.0_windows-amd64.zip - 标准版：Windows（适用英特尔和AMD）  
+   hugo_0.105.0_windows-arm64.zip - 标准版：Windows（ARM芯片）  
+   hugo_extended_0.105.0_darwin-universal.tar.gz - 扩展版：苹果Mac OS系统（适用M1和英特尔）  
+   hugo_extended_0.105.0_Linux-64bit.tar.gz - 扩展版：通用Linux（适用英特尔和AMD）  
+   hugo_extended_0.105.0_linux-amd64.deb - 扩展版：Debian/Ubuntu（适用英特尔和AMD）  
+   hugo_extended_0.105.0_linux-amd64.tar.gz - 扩展版：通用Linux（适用英特尔和AMD）  
+   hugo_extended_0.105.0_linux-arm64.deb - 扩展版：Debian/Ubuntu（ARM）  
+   hugo_extended_0.105.0_linux-arm64.tar.gz - 扩展版：通用Linux（ARM）  
+   hugo_extended_0.105.0_windows-amd64.zip - 扩展版：Windows（适用英特尔和AMD）
+   ```
 2. 例如在Linux安装，安装相关依赖 :
 
    ```shell
