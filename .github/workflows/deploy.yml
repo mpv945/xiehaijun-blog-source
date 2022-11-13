@@ -90,7 +90,9 @@ jobs: # docker https://nova.moe/accelerate-multi-arch-build-on-github-actions/ �
           extended: true # 支持扩展包
       - name: 构建Hugo网站
         # run: hugo
-        run: sed -e "s/#BUILD_TIME/$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')/g" -i.bak "$(pwd)/content/**/*.md" && hugo --minify
+        run: |
+          ls ./content -all
+          sed -e "s/#BUILD_TIME/$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')/g" -i.bak "$(pwd)/content/**/*.md" && hugo --minify
       - name: 部署静态-GitHub
         uses: peaceiris/actions-gh-pages@v3 # https://github.com/peaceiris/actions-gh-pages
         with:
