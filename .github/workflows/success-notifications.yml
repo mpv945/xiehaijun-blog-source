@@ -35,6 +35,6 @@ jobs:
           TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A" > generated.txt
           git config user.name mpv945
           git config user.email zhenxindefeng@126.com
-          git add generated.txt ./static/badge.svg
+          git add ./static/badge.svg
           git commit -m "$(TZ=Asia/Shanghai date "+%Y-%m-%d-%H_%M_%S-%A") master自动部署完成，通知流处理提交的更新。[跳过的自动化提交]"
           git push
