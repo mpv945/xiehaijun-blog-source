@@ -2,3 +2,4 @@
 *.lock
 /resources/_gen
 public
+*.bak

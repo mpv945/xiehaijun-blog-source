@@ -1,3 +1,9 @@
+<!-- 自定义代码语法高亮 -->
+{{ if .Site.Params.customCSS }}
+{{ $style := resources.Match "css/**.css" | resources.Concat "custom.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" media="screen">
+{{ end }}
+
 <!-- busuanzi -->
 {{- if .Site.Params.busuanzi.enable -}}
   <script async src="//cdnjs.cloudflare.com/ajax/libs/busuanzi/2.3.0/bsz.pure.mini.min.js"></script>

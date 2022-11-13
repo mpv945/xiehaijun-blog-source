@@ -53,6 +53,7 @@ params:
     featuredImageField: image
     rssFullContent: true
     favicon: /favicon.ico # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    customCSS: true # 自定义js和语法高亮处理：hugo gen chromastyles --style=vs > ./assets/css/syntax.css
 
     footer:
         since: 2022
@@ -60,7 +61,7 @@ params:
             <a href="https://beian.miit.gov.cn/" target="_blank">备案号</a>
             <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备19013893号-1</a>
             <br />
-            <a href="https://github.com/mpv945/xiehaijun-blog-source/actions" target="_blank">
+            <a href="https://gitee.com/mpv945/mpv945" target="_blank">
                <img src="https://www.ewancle.com/badge.svg">
             </a>
 
@@ -253,11 +254,17 @@ markup:
         endLevel: 4
         ordered: true
         startLevel: 2
-    highlight:
-        noClasses: false
+    highlight: # 语法高亮简码：https://gohugo.io/content-management/syntax-highlighting/
+        noClasses: true # 语法高亮：https://gohugo.io/getting-started/configuration-markup#highlight
+        anchorLineNos: false
         codeFences: true
-        guessSyntax: true
+        guessSyntax: false
+        hl_Lines: ""
+        hl_inline: false
+        lineAnchors: ""
         lineNoStart: 1
-        lineNos: true
+        lineNos: false
         lineNumbersInTable: true
+        noHl: false
+        style: vs #语法高亮： https://xyproto.github.io/splash/docs/all.html
         tabWidth: 4

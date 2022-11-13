@@ -1,0 +1,102 @@
+<!-- 自定义简码：https://gohugo.io/templates/shortcode-templates/ -->
+{{ $scratch := .Page.Scratch.Get "scratch" }}
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<!-- 
+教程 http://sangni.top/article/3
+网易云音乐个人歌单id获取 ：https://music.163.com/#/playlist?id=60198
+aplayer：https://aplayer.js.org/#/zh-Hans/?id=hls
+MetingJS ：https://github.com/metowolf/MetingJS
+<meting-js
+        // 歌曲ID /播放列表ID /专辑ID /搜索关键字
+        id="60198"
+        // 歌词显示 0不显示歌词,1显示
+        lrc-type="0"
+        // server(音乐平台)，netease指网易云音乐,tencent，kugou
+        server="netease"
+        // order(顺序) 播放器播放顺序，值："list"，"random"
+        order="list"
+        // type（类型）song，playlist，album，search，artist
+        type="playlist"
+        // 启用固定模式，默认false
+        fixed="true"
+        // 指示列表是否应该首先折叠
+        list-folded="true"
+        // 自动播放 默认false
+        autoplay="true"
+        // 防止同时播放多个播放器，当该播放器开始播放时暂停其他播放器
+        mutex="true"
+        >
+</meting-js> -->
+<meting-js
+{{ if .IsNamedParams }}
+id="{{ .Get "id" }}"
+{{ else }}
+id="{{ .Get 0 }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+server="{{ .Get "server" }}"
+{{ else }}
+server="{{ .Get 1 }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+type="{{ .Get "type" }}"
+{{ else }}
+type="{{ .Get 2 }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+auto="{{ .Get "auto" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+fixed="{{ .Get "fixed" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+mini="{{ .Get "mini" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+autoplay="{{ .Get "autoplay" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+theme="{{ .Get "theme" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+loop="{{ .Get "loop" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+order="{{ .Get "order" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+preload="{{ .Get "preload" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+volume="{{ .Get "volume" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+mutex="{{ .Get "mutex" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+lrc-type="{{ .Get "lrc-type" }}"
+{{ end }}
+
+{{ if .IsNamedParams }}
+list-folded="{{ .Get "list-folded" }}"
+{{ end }}
+>
+</meting-js>
+{{ $scratch.Set "music" true }}
