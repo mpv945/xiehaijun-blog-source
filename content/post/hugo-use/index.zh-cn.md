@@ -22,7 +22,7 @@ tags_weight: 1
 
 <!-- {{< audio-music 1304708603 >}} -->
 <!-- 设置说明 https://www.jianshu.com/p/1f974b6fb2dd -->
-{{< music id="1901371647" server="netease" type="song" auto="netease" fixed="false" mini="false" autoplay="true" theme="#2980b9" loop="all" order="list" preload="auto" volume="0.1" mutex="true" lrc-type="1" list-folded="false" >}}
+{{< music id="1985221664" server="netease" type="song" auto="netease" fixed="false" mini="false" autoplay="true" theme="#2980b9" loop="all" order="list" preload="auto" volume="0.1" mutex="true" lrc-type="1" list-folded="false" >}}
 
 
 
