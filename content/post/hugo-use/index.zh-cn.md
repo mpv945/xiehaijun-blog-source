@@ -7,7 +7,7 @@ date: 2022-11-13
 lastmod: #BUILD_TIME
 keywords: [ "Hugo", "博客", "blog" ]
 slug: blog-1-chinese
-image: https://images.ewancle.com/blog/imghugo-what.png
+image: https://static.fynf.eu.org/blog/imghugo-what.png
 # 如果要在该帖子/页面中使用库，请使用前面的参数 math。
 # math: true
 categories:
@@ -26,7 +26,7 @@ tags_weight: 1
 
 
 
-![Hugo](https://images.ewancle.com/blog/imghugo-logo-wide.svg) 
+![Hugo](https://static.fynf.eu.org/blog/imghugo-logo-wide.svg) 
 
 ## Hugo 简介
 
@@ -314,4 +314,4 @@ tags_weight: 1
    Press Ctrl+C to stop
    ```
 
-5. 复制上面提示的内容：http://localhost:1313/ 这就是本地运行的blog![初次运行的本地Blog](https://images.ewancle.com/blog/imghugo-init-page.png)
+5. 复制上面提示的内容：http://localhost:1313/ 这就是本地运行的blog![初次运行的本地Blog](https://static.fynf.eu.org/blog/imghugo-init-page.png)
