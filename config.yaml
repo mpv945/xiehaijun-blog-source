@@ -127,7 +127,7 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/component.html
         waline:
-            serverURL: https://waline.fynf.eu.org/
+            serverURL: https://waline.ewancle.com/
             lang: zh-CN
             pageview:
             visitor: false
