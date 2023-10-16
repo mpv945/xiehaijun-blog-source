@@ -132,11 +132,11 @@ params:
             pageview:
             visitor: false
             emoji:
-                - https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo
-                # - https://cdn.jsdelivr.net/gh/walinejs/emojis/qq
-                # - https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba
-                # - https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus
-                # - https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili
+                - https://fastly.jsdelivr.net/gh/walinejs/emojis/weibo
+                # - https://fastly.jsdelivr.net/gh/walinejs/emojis/qq
+                # - https://fastly.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba
+                # - https://fastly.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus
+                # - https://fastly.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili
             requiredMeta:
                 - name
                 - email
