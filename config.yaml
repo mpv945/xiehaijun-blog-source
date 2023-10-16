@@ -12,12 +12,12 @@ languages:
         languageName: English
         title: Example Site
         description: Example description
-        weight: 1
+        weight: 2
     zh-cn:
         languageName: 中文
         title: 高山流水
         description: 高山流水
-        weight: 2
+        weight: 1
     ar:
         languageName: عربي
         languagedirection: rtl
