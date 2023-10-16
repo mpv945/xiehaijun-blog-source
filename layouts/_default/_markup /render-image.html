@@ -1,7 +1,9 @@
-{{- $image := .Page.Resources.GetMatch (printf "%s" (.Destination | safeURL)) -}}
 {{- $Permalink := .Destination | relURL | safeURL -}}
+{{- $image := "" -}}
 {{- if hasPrefix $Permalink "http" -}}
 	{{- $image = resources.GetRemote $Permalink -}}
+{{- else -}}
+	{{- $image = .Page.Resources.GetMatch (printf "%s" (.Destination | safeURL)) -}}
 {{- end -}}
 {{- $alt := .PlainText | safeHTML -}}
 {{- $Width := 0 -}}
