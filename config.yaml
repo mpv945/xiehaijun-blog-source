@@ -32,6 +32,7 @@ disqusShortname: hugo-theme-stack
 # 网站分析：https://huohuade-blog.github.io/p/%E7%94%A8hugo-stack%E4%B8%BB%E9%A2%98%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/
 googleAnalytics: G-R9NLEPBQDM
 
+# 百度主动提交收录：https://www.huaweicloud.com/zhishi/site-sitemap.html
 sitemap:
   changeFreq: ""
   filename: sitemap.xml
